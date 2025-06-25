@@ -1,0 +1,29 @@
+char receivedChar;
+int device1 = 8; // Light
+int device2 = 9; // Fan
+
+void setup() {
+  Serial.begin(9600);        // Initialize Bluetooth Serial
+  pinMode(device1, OUTPUT);
+  pinMode(device2, OUTPUT);
+  digitalWrite(device1, LOW);
+  digitalWrite(device2, LOW);
+}
+
+void loop() {
+  if (Serial.available()) {
+    receivedChar = Serial.read();
+
+    if (receivedChar == 'A') {
+      digitalWrite(device1, HIGH); // Turn ON Light
+    } else if (receivedChar == 'a') {
+      digitalWrite(device1, LOW);  // Turn OFF Light
+    }
+
+    if (receivedChar == 'B') {
+      digitalWrite(device2, HIGH); // Turn ON Fan
+    } else if (receivedChar == 'b') {
+      digitalWrite(device2, LOW);  // Turn OFF Fan
+    }
+  }
+}
